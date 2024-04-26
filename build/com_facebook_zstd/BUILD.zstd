@@ -1,0 +1,29 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "zstd",
+    srcs = glob(
+        [
+            "lib/decompress/*.c",
+            "lib/decompress/*.h",
+            "lib/common/*.c",
+            "lib/common/*.h",
+            "lib/dictBuilder/*.c",
+            "lib/dictBuilder/*.h",
+            "lib/deprecated/*.c",
+            "lib/deprecated/*.h",
+            "lib/compress/*.c",
+            "lib/compress/*.h",
+        ],
+    ),
+    hdrs = glob(["lib/*.h"]),
+    copts = [
+        "-DXXH_NAMESPACE=ZSTD_",
+        "-DZSTD_LEGACY_SUPPORT=0",
+        "-DZSTD_MULTITHREAD",
+    ],
+    includes = ["lib"],
+    linkopts = ["-lpthread"],
+    local_defines = ["ZSTD_DISABLE_ASM"],
+    visibility = ["//visibility:public"],
+)

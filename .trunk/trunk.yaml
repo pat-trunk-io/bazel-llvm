@@ -32,4 +32,5 @@ actions:
     - trunk-upgrade-available
 tools:
   enabled:
+    - gh@2.48.0
     - bazel@7.1.1
